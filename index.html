@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f9fb">
+  <title>AESEED PROMPT — Character Archive</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="#" id="home-link">A<span>/</span>S</a>
+    <div class="topbar-center">AESEED PROMPT <span>— CHARACTER ARCHIVE</span></div>
+    <button class="search-toggle" id="search-toggle" aria-label="검색 열기">⌕</button>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-topline">
+        <span>PERSONAL DATABASE / 001</span>
+        <span>UPDATED — 2026</span>
+      </div>
+      <div class="hero-title-wrap">
+        <p class="hero-kicker">A COLLECTION OF CHARACTERS & PROMPTS</p>
+        <h1>AESEED<br><span>PROMPT<span class="blue-dot">.</span></span></h1>
+        <div class="hero-sticker">PAIR<br>ARCHIVE<br><b>↘</b></div>
+      </div>
+
+      <div class="hero-oval">
+        <img id="hero-image" src="images/hero/pair.jpg" alt="AESEED 페어 이미지" onerror="this.style.display='none'; document.getElementById('hero-placeholder').style.display='flex';">
+        <div id="hero-placeholder" class="hero-placeholder">
+          <span class="placeholder-cross">＋</span>
+          <strong>YOUR PAIR IMAGE</strong>
+          <small>images/hero/pair.jpg</small>
+          <small>사진을 이 경로에 넣어 주세요</small>
+        </div>
+        <div class="oval-label oval-label-left">AETHER <span>×</span> SEED</div>
+        <div class="oval-label oval-label-right">PAIR FILE / 001</div>
+      </div>
+
+      <div class="hero-bottom">
+        <p>Two characters, one archive.<br>Visual references and prompt notes.</p>
+        <a href="#directories" class="scroll-link">EXPLORE ARCHIVE <span>↓</span></a>
+      </div>
+    </section>
+
+    <section class="ticker" aria-label="Archive keywords">
+      <div>CHARACTER FILES <span>✳</span> PROMPT LIBRARY <span>✳</span> AESEED ARCHIVE <span>✳</span> CHARACTER FILES <span>✳</span> PROMPT LIBRARY <span>✳</span></div>
+    </section>
+
+    <main class="content">
+      <section id="search-panel" class="search-panel" hidden>
+        <label for="search-input">SEARCH ARCHIVE</label>
+        <input id="search-input" type="search" placeholder="이름 또는 프롬프트 검색">
+      </section>
+
+      <section id="directories" class="directory-section">
+        <div class="section-head">
+          <div><p class="eyebrow">01 / DIRECTORY</p><h2>Choose a folder<span>.</span></h2></div>
+          <p class="section-note">SELECT A DIRECTORY<br>TO EXPLORE THE FILES</p>
+        </div>
+        <div id="folder-grid" class="folder-grid"></div>
+      </section>
+
+      <section id="character-view" class="character-section" hidden>
+        <div class="section-head folder-section-head">
+          <div><p class="eyebrow" id="folder-kicker">DIRECTORY / 01</p><h2 id="current-folder-title">MAIN<span>.</span></h2></div>
+          <button id="back-button" class="text-button">← ALL DIRECTORIES</button>
+        </div>
+        <div class="character-toolbar"><span id="current-folder-label">FOLDER / MAIN</span><span id="character-count">00 FILES</span></div>
+        <div id="character-grid" class="character-grid"></div>
+        <p id="empty-state" class="empty-state" hidden>아직 등록된 캐릭터가 없어.<br><code>characters.json</code>에 캐릭터 정보를 추가해 줘.</p>
+      </section>
+
+      <footer class="footer">
+        <div class="footer-brand">AESEED<span>.</span></div>
+        <div>PERSONAL CHARACTER ARCHIVE<br>DESIGNED FOR MOBILE & DESKTOP</div>
+        <div class="footer-mark">A/S<br>— 001</div>
+      </footer>
+    </main>
+  </main>
+
+  <div id="character-modal" class="modal" hidden>
+    <button class="modal-backdrop" data-close-modal aria-label="팝업 닫기"></button>
+    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-name">
+      <div class="modal-topline"><span id="modal-category">CHARACTER FILE</span><button id="modal-close" class="modal-close" aria-label="닫기">×</button></div>
+      <div class="modal-content">
+        <div class="modal-image-wrap"><img id="modal-image" src="" alt=""></div>
+        <div class="modal-info">
+          <p class="eyebrow" id="modal-id">FILE / 001</p>
+          <h2 id="modal-name">Character name<span>.</span></h2>
+          <p id="modal-description" class="modal-description"></p>
+          <div class="prompt-heading"><span>PROMPT TEXT</span><span id="prompt-length"></span></div>
+          <pre id="modal-prompt" class="prompt-box"></pre>
+          <button id="copy-button" class="copy-button"><span id="copy-label">COPY PROMPT</span><span>↗</span></button>
+          <p class="copy-note">CLICK TO COPY THE FULL PROMPT TO CLIPBOARD.</p>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>

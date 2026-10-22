@@ -1,0 +1,34 @@
+{
+  "folders": [
+    {
+      "id": "main",
+      "name": "MAIN",
+      "description": "PRIMARY CHARACTER FILES"
+    },
+    {
+      "id": "sub",
+      "name": "SUB",
+      "description": "SECONDARY CHARACTER FILES"
+    }
+  ],
+  "characters": [
+    {
+      "id": "M001",
+      "folder": "main",
+      "name": "Character Name 01",
+      "subtitle": "CHARACTER / 001",
+      "description": "캐릭터 소개를 여기에 적어 줘.",
+      "image": "images/main/character-01.jpg",
+      "prompt": "1boy, silver hair, black uniform, portrait, detailed eyes"
+    },
+    {
+      "id": "S001",
+      "folder": "sub",
+      "name": "Character Name 02",
+      "subtitle": "CHARACTER / 001",
+      "description": "캐릭터 소개를 여기에 적어 줘.",
+      "image": "images/sub/character-01.jpg",
+      "prompt": "1boy, dark hair, blue eyes, portrait, casual outfit"
+    }
+  ]
+}
