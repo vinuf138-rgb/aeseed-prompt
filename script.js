@@ -1,4 +1,4 @@
-const state = { data: null, activeFolder: null, activeCharacter: null, searchOpen: false };
+const state = { data: null, activeFolder: null, activeCategory: null, activeCharacter: null, searchOpen: false };
 const $ = (selector) => document.querySelector(selector);
 const folderGrid = $("#folder-grid"), characterGrid = $("#character-grid"), modal = $("#character-modal"), toast = $("#toast");
 
@@ -19,7 +19,7 @@ function renderFolders() {
     const count = state.data.characters.filter(c => c.folder === folder.id).length;
     const button = document.createElement("button");
     button.className = "folder-card";
-    button.innerHTML = `<div class="folder-art"><span class="folder-glyph">DIRECTORY / ${String(index+1).padStart(2,"0")}</span></div><div class="folder-meta"><div><strong>${escapeHTML(folder.name)}</strong><small>${escapeHTML(folder.description || "CHARACTER COLLECTION")} · ${String(count).padStart(2,"0")} FILES</small></div><span class="folder-index">0${index+1} ↗</span></div>`;
+    button.innerHTML = `<div class="folder-art">${folder.image ? `<img class="folder-img" src="${escapeAttr(folder.image)}" alt="${escapeAttr(folder.name)}" loading="lazy">` : ""}<span class="folder-glyph">DIRECTORY / ${String(index+1).padStart(2,"0")}</span></div><div class="folder-meta"><div><strong>${escapeHTML(folder.name)}</strong><small>${escapeHTML(folder.description || "CHARACTER COLLECTION")} · ${String(count).padStart(2,"0")} FILES</small></div><span class="folder-index">0${index+1} ↗</span></div>`;
     button.addEventListener("click", () => openFolder(folder.id));
     folderGrid.appendChild(button);
   });
@@ -33,12 +33,33 @@ function openFolder(folderId) {
   $("#folder-kicker").textContent = `01 / DIRECTORY — ${folder.id.toUpperCase()}`;
   $("#current-folder-label").textContent = `FOLDER / ${folder.id.toUpperCase()}`;
   $("#search-input").value = "";
+  state.activeCategory = folderCategories(folder)[0].id;
+  renderTabs();
   renderCharacters();
   window.scrollTo({top: $("#character-view").offsetTop - 20, behavior:"smooth"});
 }
+function folderCategories(folder) {
+  const ids = folder.categories || state.data.categories.map(c => c.id);
+  return state.data.categories.filter(c => ids.includes(c.id));
+}
+function renderTabs() {
+  const box = $("#category-tabs");
+  box.innerHTML = "";
+  folderCategories(state.data.folders.find(f => f.id === state.activeFolder)).forEach(cat => {
+    const n = state.data.characters.filter(c => c.folder === state.activeFolder && c.category === cat.id).length;
+    const b = document.createElement("button");
+    b.className = "category-tab" + (cat.id === state.activeCategory ? " active" : "");
+    b.setAttribute("role", "tab");
+    b.setAttribute("aria-selected", cat.id === state.activeCategory);
+    b.innerHTML = `${escapeHTML(cat.name)}<small>${String(n).padStart(2,"0")}</small>`;
+    b.addEventListener("click", () => { state.activeCategory = cat.id; $("#search-input").value = ""; renderTabs(); renderCharacters(); });
+    box.appendChild(b);
+  });
+}
 function renderCharacters() {
   const query = $("#search-input").value.trim().toLowerCase();
-  const items = state.data.characters.filter(c => c.folder === state.activeFolder && (!query || `${c.name} ${c.subtitle||""} ${c.description||""} ${c.prompt||""}`.toLowerCase().includes(query)));
+  // 검색어가 있으면 현재 폴더의 모든 카테고리에서 검색, 없으면 선택한 카테고리만 표시
+  const items = state.data.characters.filter(c => c.folder === state.activeFolder && (query || c.category === state.activeCategory) && (!query || `${c.name} ${c.subtitle||""} ${c.description||""} ${c.prompt||""}`.toLowerCase().includes(query)));
   characterGrid.innerHTML = "";
   $("#character-count").textContent = `${String(items.length).padStart(2,"0")} FILES`;
   $("#empty-state").hidden = items.length > 0;
@@ -54,10 +75,9 @@ function renderCharacters() {
 }
 function openCharacter(c) {
   state.activeCharacter = c;
-  $("#modal-category").textContent = `${c.folder.toUpperCase()} / CHARACTER FILE`;
+  $("#modal-category").textContent = `${c.folder.toUpperCase()} / ${(c.category||"").toUpperCase()}`;
   $("#modal-id").textContent = `FILE / ${(c.id||"000").toUpperCase()}`;
   $("#modal-name").textContent = c.name;
-  $("#modal-description").textContent = c.description || "";
   $("#modal-prompt").textContent = c.prompt || "";
   $("#prompt-length").textContent = `${(c.prompt||"").length} CHARS`;
   const img=$("#modal-image");
@@ -70,7 +90,7 @@ async function copyPrompt(){
   const value=state.activeCharacter?.prompt||"";
   if(!value){showToast("복사할 프롬프트가 비어 있어.");return;}
   try{await navigator.clipboard.writeText(value);$("#copy-label").textContent="COPIED ✓";showToast("프롬프트를 복사했어!");}
-  catch{const area=document.createElement("textarea");area.value=value;area.style.position="fixed";area.style.opacity="0";document.body.appendChild(area);area.select();const ok=document.execCommand("copy");area.remove();showToast(ok?"프롬프트를 복사했어!":"복사가 막혔어. 프롬프트를 길게 눌러 직접 복사해 줙.");if(ok)$("#copy-label").textContent="COPIED ✓";}
+  catch{const area=document.createElement("textarea");area.value=value;area.style.position="fixed";area.style.opacity="0";document.body.appendChild(area);area.select();const ok=document.execCommand("copy");area.remove();showToast(ok?"프롬프트를 복사했어!":"복사가 막혔어. 프롬프트를 길게 눌러 직접 복사해 줘.");if(ok)$("#copy-label").textContent="COPIED ✓";}
 }
 function showToast(message){toast.textContent=message;toast.classList.add("show");clearTimeout(showToast.timer);showToast.timer=setTimeout(()=>toast.classList.remove("show"),2200);}
 function escapeHTML(v=""){return String(v).replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
