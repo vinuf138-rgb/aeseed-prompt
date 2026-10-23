@@ -67,8 +67,8 @@
       "category": "daily",
       "name": "DAILY",
       "subtitle": "AETHER / 001",
-      "image": "images/aether/daily-01.jpg",
-      "prompt": "aether, daily, portrait, detailed eyes"
+      "image": "https://i.ibb.co/CKntkRbG/42-20261024024349.png",
+      "prompt": "adult male, hair between eyes, messy bangs, 2::pale blue long hair, long hair, low ponytail:: light green eyes, half-lidded eyes, closed mouth, droopy eyebrows, cold sweat, \n\n{light pastel blue and white plaid button-up shirt worn open as an outer layer, unbuttoned shirt, plain white crew-neck t-shirt underneath, blue jeans}"
     },
     {
       "id": "A-HAL-001",
@@ -94,7 +94,7 @@
       "category": "daily",
       "name": "DAILY",
       "subtitle": "SEED / 001",
-      "image": "https://i.ibb.co/ZRYwMBB3/42-20261024021117.png",
+      "image": "https://i.ibb.co/FqmH23VY/42-20261024024612.png",
       "prompt": "bishoujo, slight smile, soft blush, 2::white tips, long sidelocks with white gradient tips::, 1.2::long hair, dark brown hair, long sidelocks::, blush, disconnected layers, dark green eyes, droopy eyes, middle breast\n\n{white shirt, beige cardigan, black long skirt, white sneakers}"
     },
     {
