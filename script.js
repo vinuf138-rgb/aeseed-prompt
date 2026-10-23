@@ -33,8 +33,6 @@ function openFolder(folderId) {
   $("#folder-kicker").textContent = `01 / DIRECTORY — ${folder.id.toUpperCase()}`;
   $("#current-folder-label").textContent = `FOLDER / ${folder.id.toUpperCase()}`;
   $("#search-input").value = "";
-  state.activeCategory = folderCategories(folder)[0].id;
-  renderTabs();
   renderCharacters();
   window.scrollTo({top: $("#character-view").offsetTop - 20, behavior:"smooth"});
 }
@@ -42,24 +40,12 @@ function folderCategories(folder) {
   const ids = folder.categories || state.data.categories.map(c => c.id);
   return state.data.categories.filter(c => ids.includes(c.id));
 }
-function renderTabs() {
-  const box = $("#category-tabs");
-  box.innerHTML = "";
-  folderCategories(state.data.folders.find(f => f.id === state.activeFolder)).forEach(cat => {
-    const n = state.data.characters.filter(c => c.folder === state.activeFolder && c.category === cat.id).length;
-    const b = document.createElement("button");
-    b.className = "category-tab" + (cat.id === state.activeCategory ? " active" : "");
-    b.setAttribute("role", "tab");
-    b.setAttribute("aria-selected", cat.id === state.activeCategory);
-    b.innerHTML = `${escapeHTML(cat.name)}<small>${String(n).padStart(2,"0")}</small>`;
-    b.addEventListener("click", () => { state.activeCategory = cat.id; $("#search-input").value = ""; renderTabs(); renderCharacters(); });
-    box.appendChild(b);
-  });
-}
 function renderCharacters() {
   const query = $("#search-input").value.trim().toLowerCase();
-  // 검색어가 있으면 현재 폴더의 모든 카테고리에서 검색, 없으면 선택한 카테고리만 표시
-  const items = state.data.characters.filter(c => c.folder === state.activeFolder && (query || c.category === state.activeCategory) && (!query || `${c.name} ${c.subtitle||""} ${c.description||""} ${c.prompt||""}`.toLowerCase().includes(query)));
+  const order = state.data.categories.map(c => c.id);
+  const items = state.data.characters
+    .filter(c => c.folder === state.activeFolder && (!query || `${c.name} ${c.subtitle||""} ${c.prompt||""}`.toLowerCase().includes(query)))
+    .sort((a, b) => order.indexOf(a.category) - order.indexOf(b.category));
   characterGrid.innerHTML = "";
   $("#character-count").textContent = `${String(items.length).padStart(2,"0")} FILES`;
   $("#empty-state").hidden = items.length > 0;
