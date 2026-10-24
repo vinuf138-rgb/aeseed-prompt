@@ -1,103 +1,97 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f8f9fb">
-  <title>AESEED PROMPT — Character Archive</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f1f0ec">
+  <title>HAPPY BIRTHDAY, DAD</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="topbar">
-    <a class="wordmark" href="#" id="home-link">A<span>/</span>S</a>
-    <div class="topbar-center">AESEED PROMPT <span>— CHARACTER ARCHIVE</span></div>
-    <button class="search-toggle" id="search-toggle" aria-label="검색 열기">⌕</button>
+    <span>A SPECIAL DAY</span>
+    <span>MADE WITH LOVE · 2026</span>
   </header>
 
   <main>
-    <section class="hero">
-      <div class="hero-topline">
-        <span>PERSONAL DATABASE / 001</span>
-        <span>UPDATED — 2026</span>
-      </div>
-      <div class="hero-title-wrap">
-        <p class="hero-kicker">A COLLECTION OF CHARACTERS & PROMPTS</p>
-        <h1>AESEED<br><span>PROMPT<span class="blue-dot">.</span></span></h1>
-        <div class="hero-sticker">PAIR<br>ARCHIVE<br><b>↘</b></div>
+    <section class="hero" aria-label="생일 축하 메인 화면">
+      <nav class="nav">
+        <span class="nav-side">TO MY DAD</span>
+        <a class="wordmark" href="#" aria-label="처음으로">HBD.</a>
+        <span class="nav-side nav-right">OCTOBER 24</span>
+      </nav>
+
+      <div class="hero-copy">
+        <p class="eyebrow">THE MAN, THE LEGEND</p>
+        <h1 class="back-name" aria-label="KIM HONGJIN">KIM HONGJIN</h1>
+        <p class="small-note">TODAY IS ALL ABOUT YOU.</p>
       </div>
 
-      <div class="hero-oval">
-        <img id="hero-image" src="https://i.ibb.co/q3Kt7b0Z/4da2ea45-3259-470b-b5db-454c340af308.png" alt="AESEED 페어 이미지" onerror="this.style.display='none'; document.getElementById('hero-placeholder').style.display='flex';">
-        <div id="hero-placeholder" class="hero-placeholder">
-          <span class="placeholder-cross">＋</span>
-          <strong>YOUR PAIR IMAGE</strong>
-          <small>images/hero/pair.jpg</small>
-          <small>사진을 이 경로에 넣어 주세요</small>
-        </div>
-        <div class="oval-label oval-label-left">AETHER <span>×</span> SEED</div>
-        <div class="oval-label oval-label-right">PAIR FILE / 001</div>
-      </div>
+      <button class="photo-button" id="photoButton" aria-label="아빠 사진을 눌러 생일 축하 열기">
+        <img id="dadPhoto" src="https://i.ibb.co/RrbkxrF/Screenshot-20261024-104037-Kakao-Talk.png" alt="아빠 사진">
+        <span class="photo-hint">CLICK TO OPEN YOUR SURPRISE ↗</span>
+      </button>
 
       <div class="hero-bottom">
-        <p>Two characters, one archive.<br>Visual references and prompt notes.</p>
-        <a href="#directories" class="scroll-link">EXPLORE ARCHIVE <span>↓</span></a>
+        <span>FOR THE BEST DAD</span>
+        <span>SCROLL LESS, LOVE MORE</span>
       </div>
     </section>
 
-    <section class="ticker" aria-label="Archive keywords">
-      <div>CHARACTER FILES <span>✳</span> PROMPT LIBRARY <span>✳</span> AESEED ARCHIVE <span>✳</span> CHARACTER FILES <span>✳</span> PROMPT LIBRARY <span>✳</span></div>
+    <section class="intro-strip">
+      <span class="strip-star">✳</span>
+      <p>A LITTLE SURPRISE, MADE JUST FOR YOU.</p>
+      <span class="strip-star">✳</span>
     </section>
 
-    <div class="content">
-      <section id="search-panel" class="search-panel" hidden>
-        <label for="search-input">SEARCH ARCHIVE</label>
-        <input id="search-input" type="search" placeholder="이름 또는 프롬프트 검색">
-      </section>
+    <section class="surprise" id="surprise" aria-live="polite">
+      <div class="surprise-heading">
+        <p class="eyebrow">A NOTE FROM YOUR FAMILY</p>
+        <h2>Something<br><em>for you.</em></h2>
+        <p class="instruction">위의 사진을 눌러 편지를 열어보세요.</p>
+      </div>
 
-      <section id="directories" class="directory-section">
-        <div class="section-head">
-          <div><p class="eyebrow">01 / DIRECTORY</p><h2>Choose a folder<span>.</span></h2></div>
-          <p class="section-note">SELECT A DIRECTORY<br>TO EXPLORE THE FILES</p>
+      <div class="envelope-scene" id="envelopeScene">
+        <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+        <button class="birthday-collage" id="birthdayCollage" aria-label="생일 축하 문구 닫기" title="터치하면 사라져요"><img src="https://i.ibb.co/0VqbbqVX/c5bb603f-fc5d-4a4a-af79-b924bedf6646.png" alt="Happy Birthday 스크랩 문구"><span>TOUCH TO CONTINUE ↓</span></button>
+        <div class="envelope" id="envelope">
+          <div class="envelope-back"></div>
+          <div class="letter-preview" id="letterPreview" role="button" tabindex="0" aria-label="편지 열기">
+            <span class="letter-top">A LETTER FOR YOU · WITH LOVE</span>
+            <strong>HAPPY<br>BIRTHDAY</strong>
+            <span class="letter-bottom">OPEN WHEN YOU'RE READY ↗</span>
+          </div>
+          <div class="envelope-front"></div>
+          <div class="envelope-flap"></div>
+          <div class="envelope-seal">♥</div>
         </div>
-        <div id="folder-grid" class="folder-grid"></div>
-      </section>
+        <p class="tap-note">생일 문구를 터치해 닫은 뒤, 편지지를 터치해 읽어보세요</p>
+      </div>
+    </section>
 
-      <section id="character-view" class="character-section" hidden>
-        <div class="section-head folder-section-head">
-          <div><p class="eyebrow" id="folder-kicker">DIRECTORY / 01</p><h2 id="current-folder-title">MAIN<span>.</span></h2></div>
-          <button id="back-button" class="text-button">← ALL DIRECTORIES</button>
-        </div>
-        <div class="character-toolbar"><span id="current-folder-label">FOLDER / MAIN</span><span id="character-count">00 FILES</span></div>
-        <div id="character-grid" class="character-grid"></div>
-        <p id="empty-state" class="empty-state" hidden>아직 등록된 캐릭터가 없어.<br><code>characters.json</code>에 캐릭터 정보를 추가해 줘.</p>
-      </section>
-
-      <footer class="footer">
-        <div class="footer-brand">AESEED<span>.</span></div>
-        <div>PERSONAL CHARACTER ARCHIVE<br>DESIGNED FOR MOBILE & DESKTOP</div>
-        <div class="footer-mark">A/S<br>— 001</div>
-      </footer>
-    </div>
+    <footer>
+      <span>MADE WITH LOVE</span>
+      <span>KIM HONGJIN · HAPPY BIRTHDAY</span>
+    </footer>
   </main>
 
-  <div id="character-modal" class="modal" hidden>
-    <button class="modal-backdrop" data-close-modal aria-label="팝업 닫기"></button>
-    <section class="modal-card" role="dialog" aria-modal="true" aria-labelledby="modal-name">
-      <div class="modal-topline"><span id="modal-category">CHARACTER FILE</span><button id="modal-close" class="modal-close" aria-label="닫기">×</button></div>
-      <div class="modal-content">
-        <div class="modal-image-wrap"><img id="modal-image" src="" alt=""></div>
-        <div class="modal-info">
-          <p class="eyebrow" id="modal-id">FILE / 001</p>
-          <h2 id="modal-name">Character name<span>.</span></h2>
-          <div class="prompt-heading"><span>PROMPT TEXT</span><span id="prompt-length"></span></div>
-          <pre id="modal-prompt" class="prompt-box"></pre>
-          <button id="copy-button" class="copy-button"><span id="copy-label">COPY PROMPT</span><span>↗</span></button>
-          <p class="copy-note">CLICK TO COPY THE FULL PROMPT TO CLIPBOARD.</p>
-        </div>
+  <div class="letter-modal" id="letterModal" aria-hidden="true">
+    <button class="modal-close" id="closeLetter" aria-label="편지 닫기">×</button>
+    <div class="full-letter">
+      <p class="letter-kicker">TO. THE BEST DAD IN THE WORLD</p>
+      <p class="letter-date">A LITTLE LETTER, JUST FOR YOU</p>
+      <h2>Happy Birthday,<br><em>Dad.</em></h2>
+      <div class="letter-body" id="letterBody">
+        아버지 생일 축하드려요!!! 언제나 가족을 위해 힘내주시고 저를 위해서 지학도 가르쳐주시고 일도 해주셔서 감사합니다 😭😭😭<br><br>
+        이번년도는 예전과 다르게 좀 차가운 편지를 보내게 되었네요.. 손편지가 아니라서 죄송합니다.. 근데 A4지에 편지를 쓸 수는 없으니까!!!<br><br>
+        늘 표현은 잘 못하고 말도 안듣는 딸이지만 항상 감사하고 사랑합니다…. (난 엄마보다 아빠가 더 좋아 아빠만 봐야해 ✌️) 정말 언제나 쓰는 문구지만 언젠간 달라진 모습을 보여서 아버지가 보고 웃을 수 있는 딸이 될게요.<br><br>
+        태어나주셔서 감사합니다. 생신 축하드려요 아빠 나중 생일도 다 챙겨즁게~♡♡♡♡<br><br>
+        - 둘째 딸
       </div>
-    </section>
+      <div class="letter-signoff">WITH ALL MY LOVE <span>♥</span></div>
+    </div>
   </div>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
   <script src="script.js"></script>
 </body>
 </html>
